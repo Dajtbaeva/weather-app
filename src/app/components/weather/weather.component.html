@@ -1,0 +1,70 @@
+<div class="search">
+  <form #form="ngForm" (submit)="search()">
+    <input
+      type="text"
+      placeholder="Search city"
+      name="city"
+      [(ngModel)]="city"
+    />
+  </form>
+</div>
+
+<div class="container" *ngIf="weatherData">
+  <div class="top_part">
+    <img
+      src="../assets/coldp.jpg"
+      *ngIf="toCelcius(weatherData.main.temp) > 0"
+    />
+    <img
+      src="../assets/cold3.jpg"
+      *ngIf="toCelcius(weatherData.main.temp) <= 0"
+    />
+
+    <div class="weather-data">
+      <div class="location">{{ weatherData.name }}</div>
+      <div class="temp">
+        {{ toCelcius(weatherData.main.temp) | number : "1.0-0" }}&#8451;
+      </div>
+    </div>
+  </div>
+  <div class="bottom_part">
+    <div class="more_info">More Information</div>
+    <div class="details">
+      <div class="details-block">
+        <div class="details-block-label">
+          <img src="../assets/cold.png" alt="" />
+          <span>Min</span>
+        </div>
+        <div class="details-block-value">
+          {{ toCelcius(weatherData.main.temp_min) | number : "1.0-0" }}&#8451;
+        </div>
+      </div>
+
+      <div class="details-block">
+        <div class="details-block-label">
+          <img src="../assets/hot.png" alt="" />
+          <span>Max</span>
+        </div>
+        <div class="details-block-value">
+          {{ toCelcius(weatherData.main.temp_max) | number : "1.0-0" }}&#8451;
+        </div>
+      </div>
+
+      <div class="details-block">
+        <div class="details-block-label">
+          <img src="../assets/humidity.png" alt="" />
+          <span>Humidity</span>
+        </div>
+        <div class="details-block-value">{{ weatherData.main.humidity }}%</div>
+      </div>
+
+      <div class="details-block">
+        <div class="details-block-label">
+          <img src="../assets/wind.png" alt="" />
+          <span>Wind</span>
+        </div>
+        <div class="details-block-value">{{ weatherData.wind.speed }} km/h</div>
+      </div>
+    </div>
+  </div>
+</div>
